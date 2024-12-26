@@ -14,3 +14,6 @@ av
 pydub
 fastapi
 uvicorn
+pydantic_settings
+soundfile
+python-multipart
