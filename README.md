@@ -99,5 +99,27 @@ curl -X 'POST' \
 }'
 ```
 
+## 三、构建镜像
 
+在本项目根目录下执行命令：
+
+```shell
+docker build -t zacksock/chattts-api .
+```
+
+把 `zacksock/chattts-api`修改为你的镜像名字。
+
+然后使用一下命令创建并运行容器：
+
+```shell
+docker run -d --name chattts-api -v ./asset:/app/asset -p 8000:8000 -t zacksock/chattts-api
+```
+
+如果有NVIDIA GPU，则可以运行：
+
+```shell
+docker run -d --gpus '"device=0"' --name chattts-api -v ./asset:/app/asset -p 8000:8000 -t zacksock/chattts-api
+```
+
+## 四、Docker Compose
 
