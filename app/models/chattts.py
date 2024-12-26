@@ -9,7 +9,7 @@ class BaseSpeaker(BaseModel):
 
 class Text(BaseModel):
     text: str
-    speaker: Optional[str]
+    speaker: Optional[str] = None
 
 
 class SpeakerCreate(BaseSpeaker):

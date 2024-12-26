@@ -19,7 +19,7 @@ def _tts(chattts: Chat, text: str, speaker_filepath: Optional[str] = None):
             **params_infer_code,
         )
     else:
-        params_infer_code = {}
+        params_infer_code = Chat.InferCodeParams()
     wavs = chattts.infer(text, use_decoder=True, params_infer_code=params_infer_code)
     buffer = io.BytesIO()
     sf.write(buffer, wavs[0], 24000, format="WAV")  # 保存为 WAV 格式
