@@ -3,6 +3,13 @@ LABEL authors="zackfair"
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # 设置国内 PyPI 源，加速依赖安装
 RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
 

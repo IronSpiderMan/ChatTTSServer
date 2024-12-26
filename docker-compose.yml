@@ -1,0 +1,18 @@
+services:
+  chattts-api:
+    image: zacksock/chattts-api
+    container_name: chattts-api
+    ports:
+      - "5000:8000"
+    volumes:
+      - ./asset:/app/asset
+      - ./.env:/app/.env
+      - ./data:/app/data
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
