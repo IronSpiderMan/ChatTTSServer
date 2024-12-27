@@ -66,6 +66,15 @@ async def list_speakers(session: sqlite3.Connection = Depends(get_db)):
     )
 
 
+@router.delete("/delete-speaker/{sid}")
+async def delete_speaker(sid: int, session: sqlite3.Connection = Depends(get_db)):
+    result = chattts_cruds.delete_speaker_by_id(session, sid)
+    if result:
+        return {"message": "Speaker deleted successfully!", "sid": sid}
+    else:
+        raise HTTPException(status_code=404, detail="Speaker not found")
+
+
 @router.post("/tts")
 async def tts(text: Text, session: sqlite3.Connection = Depends(get_db)):
     if not text.text.strip():

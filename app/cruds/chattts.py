@@ -47,3 +47,18 @@ def create_speaker(db: Connection, speaker: SpeakerCreate, filepath: str) -> int
     finally:
         cursor.close()
     return 1
+
+
+def delete_speaker_by_id(db: Connection, speaker_id: int) -> int:
+    cursor = db.cursor()
+    try:
+        cursor.execute("DELETE FROM speakers WHERE id = ?", (speaker_id,))
+        if cursor.rowcount == 0:
+            return 0
+        db.commit()
+        return 1
+    except (sqlite3.InternalError, Exception) as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Failed to delete speaker: {e}")
+    finally:
+        cursor.close()
